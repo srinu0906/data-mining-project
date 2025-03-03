@@ -8,11 +8,16 @@
         body { 
           font-family: Arial, sans-serif; 
           text-align: center;
+          padding-top: 20px;
+         
         }
         form { 
           display: inline-block;
           text-align: left;
-          margin-top: 50px; 
+          margin-top: 40px; 
+          padding: 20px 20px 20px 30px;
+          border-radius: 10px;
+          box-shadow: 1px 1px 10px black;
         }
         input, textarea {
           display: block; 
@@ -24,15 +29,31 @@
         button {
           padding: 10px 20px; 
           cursor: pointer; 
+          width:95%;
+          border-radius: 5px;
+          background-color: rgba(0, 0, 0, 0.8);
+          color: white;
+        }
+        div input{
+          width: auto;
+        }
+        div p{
+          margin-left: 5px;
+        }
+        div{
+          display:grid;
+          grid-template-columns: 15px 50px;
+          padding-left: 15px;
+          font-size: 15px;
         }
     </style>
 </head>
 <body>
-    <h2>Submit Your Details</h2>
+    <h2>Impact of Social Media on Acedemic Performance</h2>
     <form id="myForm">
       
-      <h4>Name</h4>
-      <input type="text" id="sid" placeholder="Your Name" required>
+      <h4>Student ID</h4>
+      <input type="text" id="sid" placeholder="Your Roll No" required>
       
       <h4>Year of study</h4>
       <input type="text" id="year" placeholder="Eg: II" required>
@@ -41,65 +62,110 @@
       <input type="text" id="branch" placeholder="Eg: CSE" required>
       
       <h4>Section</h4>
-      <input type="text" id="section" placeholder="Eg:I,II" required>
+      <input type="text" id="section" placeholder="Eg: D" required>
       
       <h4>Residence Type</h4>
-      <input type="text" id="residence" placeholder="Eg:I,II" required>
-      
+      <div>
+        <input type="radio" name="residence" value="Hostler"> <p>Hostler</p>
+        <input type="radio" name="residence" value="DaySchoolar"> <p>DaySchoolar</p>
+        <input type="radio" name="residence" value="Room"> <p>Room</p>
+      </div>
+
+      <h4>Gender</h4>
+      <div>
+        <input type="radio" name="gender" value="Male"> <p>Male</p>
+        <input type="radio" name="gender" value="Female"> <p>Female</p>
+      </div>
+  
       <h4>College</h4>
-      <input type="text" id="collgeName" placeholder="Eg:I,II" required>
+      <input type="text" id="collgeName" placeholder="Eg: SR GEC" required>
       
-      <h4>Institution Type</h4>
-      <input type="text" id="collegeType" placeholder="Eg:I,II" required>   
+      <h4>Course Type</h4>
+      <div>
+        <input type="radio" name="collegeType" value="Enginnering"> <p>Enginnering</p>
+        <input type="radio" name="collegeType" value="Degree"> <p>Degree</p>
+        <input type="radio" name="collegeType" value="Agriculture"> <p>Agriculture</p>
+        <input type="radio" name="collegeType" value="Pharmacy"> <p>Pharmacy</p>
+      </div> 
+
       
       <h4>City</h4>
-      <input type="text" id="city" placeholder="Eg:I,II" required>
+      <input type="text" id="city" placeholder="Eg: Vijayawada" required>
       
       <h4>District</h4>
-      <input type="text" id="dist" placeholder="Eg:I,II" required>
+      <input type="text" id="dist" placeholder="Eg: Krishna" required>
       
       <h4>State</h4>
-      <input type="text" id="state" placeholder="Eg:I,II" required>
+      <input type="text" id="state" placeholder="Eg: AP" required>
       
-      <h4>College</h4>
-      <input type="text" id="collegeName" placeholder="Eg:I,II" required>  
       
       <h4>Active Social Media Accounts</h4>
-      <input type="text" id="socialMedia" placeholder="Eg:I,II" required>   
+      <div>
+        <input type="checkbox" name="socialMedia" value="Facebook"> <p>Facebook</p>
+        <input type="checkbox" name="socialMedia" value="Instagram"> <p>Instagram</p>
+        <input type="checkbox" name="socialMedia" value="SnapChat"> <p>SnapChat</p>
+        <input type="checkbox" name="socialMedia" value="LinkedIn"> <p>LinkedIn</p>
+        <input type="checkbox" name="socialMedia" value="YouTube"> <p>YouTube</p>
+        <input type="checkbox" name="socialMedia" value="X"> <p>X</p>
+        <input type="checkbox" name="socialMedia" value="WhatsApp"> <p>WhatsApp</p>
+        <input type="checkbox" name="socialMedia" value="Telegram"> <p>Telegram</p>
+        <input type="checkbox" name="socialMedia" value="Threads"> <p>Threads</p>
+      </div>
+      
+
       
       <h4>Purpose of using</h4>
-      <input type="text" id="category" placeholder="Eg:I,II" required>
+      <div>
+        <input type="checkbox" name="category" value="Entertainment"> <p>Entertainment/Scrolling</p>
+        <input type="checkbox" name="category" value="Social"> <p>Social/Messaging</p>
+        <input type="checkbox" name="category" value="Education"> <p>Education</p>
+        <input type="checkbox" name="category" value="Bussiness"> <p>Bussiness/Freelancing</p>
+      </div>
+     
 
       <h4>Time spend on Social Media per day in hours</h4>
       <input type="number" id="socialMediaTime" placeholder="Eg:I,II" required>
       
       <h4>Preferred Study method</h4>
-      <input type="text" id="studyMethod" placeholder="Eg:I,II" required>
+      <div>
+        <input type="radio" name="studyMethod" value="Solo"> <p>Solo</p>
+        <input type="radio" name="studyMethod" value="Group"> <p>Group</p>
+      </div>
       
       <h4>Preparation period before exam</h4>
-      <input type="text" id="preparationPeriod" placeholder="Eg:I,II" required>
+      <div>
+        <input type="radio" name="preparationPeriod" value="One Day"> <p>OneDay</p>
+        <input type="radio" name="preparationPeriod" value="One Week"> <p>OneWeek</p>
+        <input type="radio" name="preparationPeriod" value="Two Weeks"> <p>TwoWeeks</p>
+        <input type="radio" name="preparationPeriod" value="One Month"> <p>OneMonth</p>
+      </div>
       
       <h4>Preferred Study Resource</h4>
-      <input type="text" id="resource" placeholder="Eg:I,II" required> 
+      <div>
+        <input type="checkbox" name="resource" value="Library"> <p>Library</p>
+        <input type="checkbox" name="resource" value="Notes"> <p>Notes</p>
+        <input type="checkbox" name="resource" value="Learning Materials"> <p>LearningMaterials</p>
+        <input type="checkbox" name="resource" value="Online Videos"> <p>OnlineVideos</p>
+      </div>
       
       <h4>Time spent on studying per day in hours</h4>
-      <input type="number" id="studyTime" placeholder="Eg:I,II" required>      
+      <input type="number" id="studyTime" required>      
       
       <h4>Current C.G.P.A/ Percentage</h4>
-      <input type="text" id="cgpa" placeholder="Eg:I,II" required>
+      <input type="text" id="cgpa" placeholder="Eg: 8.8 , 78" required>
       
       <h4>Number of Certifications done</h4>
-      <input type="text" id="certifications" placeholder="Eg:I,II" required>      
+      <input type="text" id="certifications"  required>      
       
        <h4>Number of Projects done</h4>
-      <input type="number" id="projects" placeholder="Eg:I,II" required>  
+      <input type="number" id="projects" required>  
       
       <h4>Number of workshops attended</h4>
-      <input type="number" id="workshops" placeholder="Eg:I,II" required>
+      <input type="number" id="workshops"  required>
       
       <h4>Number of seminars attended</h4>
-      <input type="number" id="seminars" placeholder="Eg:I,II" required>
-      
+      <input type="number" id="seminars" required>
+      <br><br>
       <button type="submit">Submit</button>
     </form>
     <script src="main.js"></script>
