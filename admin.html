@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        #adminPanel { display: none; margin-top: 50px; }
+        input { padding: 10px; margin: 10px; }
+        button { padding: 10px 20px; cursor: pointer; }
+        table { width: 90%; margin: 20px auto; border-collapse: collapse; display: none; }
+        th, td { padding: 10px; border: 1px solid black; text-align: left; }
+        th { background: #007BFF; color: white; }
+        #total { font-size: 18px; margin-top: 20px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div id="loginBox">
+        <h2>Admin Login</h2>
+        <input type="password" id="password" placeholder="Enter Admin Password">
+        <button onclick="login()">Login</button>
+        <p id="errorMsg" style="color:red;"></p>
+    </div>
+
+    <div id="adminPanel">
+        <h2>Admin Panel - Submitted Data</h2>
+        <button onclick="logout()">Logout</button>
+        <div id="total">Total Submissions: 0</div>
+        <table id="dataTable">
+            <thead>
+                <tr>
+                    <th>SID</th>
+                    <th>Year</th>
+                    <th>Branch</th>
+                    <th>Section</th>
+                    <th>Residence</th>
+                    <th>College Name</th>
+                    <th>College Type</th>
+                    <th>City</th>
+                    <th>District</th>
+                    <th>State</th>
+                    <th>Social Media</th>
+                    <th>Category</th>
+                    <th>Social Media Time</th>
+                    <th>Study Method</th>
+                    <th>Preparation Period</th>
+                    <th>Resource</th>
+                    <th>Study Time</th>
+                    <th>CGPA</th>
+                    <th>Certifications</th>
+                    <th>Projects</th>
+                    <th>Workshops</th>
+                    <th>Seminars</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>
