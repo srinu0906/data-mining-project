@@ -5,6 +5,7 @@ document.getElementById("myForm").addEventListener("submit", async function(even
     const getCheckboxValues = (name) => [...document.querySelectorAll(`input[name="${name}"]:checked`)].map(cb => cb.value);
 
     const formData = {
+        time: new Date().toISOString() ,
         sid: document.getElementById("sid").value,
         year: document.getElementById("year").value,
         branch: document.getElementById("branch").value,

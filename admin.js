@@ -18,6 +18,7 @@ fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
     submissions.slice(1).forEach(entry => {
         const row = document.createElement("tr");
         row.innerHTML = `
+            <td>${entry.time}</td>
             <td>${entry.sid}</td>
             <td>${entry.year}</td>
             <td>${entry.branch}</td>
