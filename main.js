@@ -1,8 +1,8 @@
-document.getElementById("myForm").addEventListener("submit", function(event) {
+document.getElementById("myForm").addEventListener("submit", async function(event) {
     event.preventDefault();
+
     const getRadioValue = (name) => document.querySelector(`input[name="${name}"]:checked`)?.value || "Not Selected";
     const getCheckboxValues = (name) => [...document.querySelectorAll(`input[name="${name}"]:checked`)].map(cb => cb.value);
-
 
     const formData = {
         sid: document.getElementById("sid").value,
@@ -30,13 +30,36 @@ document.getElementById("myForm").addEventListener("submit", function(event) {
         seminars: document.getElementById("seminars").value
     };
 
-    fetch("https://api.jsonbin.io/v3/b/67c59ea0acd3cb34a8f42c5a", {
-        method: "PUT",  // Use PUT to update the JSON Bin
+    const binId = "67c59ea0acd3cb34a8f42c5a";
+    const secretKey = "$2a$10$OJjRvF68OcMXhl8FUe3h3O6oT0APHl5liX1iyRTkKLG0jWAgkRuSi";
+    let existingData = [];
+
+    try {
+        // Step 1: Fetch Existing Data
+        let response = await fetch(`https://api.jsonbin.io/v3/b/${binId}/latest`, {
+            method: "GET",
+            headers: {
+                "X-Master-Key": secretKey
+            }
+        });
+
+        let json = await response.json();
+        existingData = Array.isArray(json.record) ? json.record : [];  // Ensure existingData is an array
+    } catch (error) {
+        console.error("Error fetching existing data:", error);
+    }
+
+    // Step 2: Append New Data
+    existingData.push(formData);
+
+    // Step 3: Update Bin with New Data
+    fetch(`https://api.jsonbin.io/v3/b/${binId}`, {
+        method: "PUT",
         headers: {
             "Content-Type": "application/json",
-            "X-Master-Key": "$2a$10$OJjRvF68OcMXhl8FUe3h3O6oT0APHl5liX1iyRTkKLG0jWAgkRuSi"
+            "X-Master-Key": secretKey
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(existingData)
     })
     .then(response => response.json())
     .then(result => {
