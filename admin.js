@@ -24,7 +24,7 @@ fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
             <td>${entry.branch}</td>
             <td>${entry.section}</td>
             <td>${entry.residence}</td>
-            <td>${entry.collgeName}</td>
+            <td>${entry.college}</td>
             <td>${entry.collegeType}</td>
             <td>${entry.city}</td>
             <td>${entry.dist}</td>

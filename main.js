@@ -12,7 +12,7 @@ document.getElementById("myForm").addEventListener("submit", async function(even
         section: document.getElementById("section").value,
         residence: getRadioValue("residence"),
         gender: getRadioValue("gender"),
-        collgeName: document.getElementById("collgeName").value,
+        college: document.getElementById("college").value,
         collegeType: getRadioValue("collegeType"),
         city: document.getElementById("city").value,
         dist: document.getElementById("dist").value,
