@@ -1,0 +1,111 @@
+﻿--							OLAP Operations
+
+--STAR SCHEMA CUBE
+--	Roll-Up (Aggregating from Students to College Level)
+
+SELECT 
+    NON EMPTY {[Measures].[Avg Study Time], [Measures].[Avg Social Media Time], [Measures].[Avg Cgpa]} ON COLUMNS, 
+    NON EMPTY {[College Dim].[College Name].Members} ON ROWS
+FROM [Star Schema Cube];
+
+
+--	Drill-Down (From College to Individual Students)
+SELECT 
+    NON EMPTY {[Measures].[Avg Study Time], [Measures].[Avg Social Media Time], [Measures].[Avg Cgpa]} ON COLUMNS, 
+    NON EMPTY {[College Dim].[College Name].Members * [Student Dim].[Student Id].Members} ON ROWS
+FROM [Star Schema Cube];
+
+
+--	Dice (Filtering Data for a Specific Preparation Period)
+SELECT 
+    NON EMPTY {[Measures].[Avg Study Time], [Measures].[Avg Social Media Time], [Measures].[Avg Cgpa]} ON COLUMNS 
+FROM [Star Schema Cube]
+WHERE ([Study Method Dim].[Preparation Period].&[One Week]);
+
+
+--	Slice (Filtering by College & Preparation Period)
+SELECT 
+    NON EMPTY {[Measures].[Avg Study Time], [Measures].[Avg Social Media Time], [Measures].[Avg Cgpa]} ON COLUMNS, 
+    NON EMPTY {[Student Dim].[Student Id].Members} ON ROWS
+FROM [Star Schema Cube]
+WHERE (
+    [College Dim].[College Name].&[SR Gudlavalleru Engineering College], 
+    [Study Method Dim].[Preparation Period].&[One Week]);
+
+--	Pivot (Switching Rows and Columns)
+SELECT 
+    NON EMPTY {[College Dim].[College Name].Members} ON COLUMNS, 
+    NON EMPTY {[Measures].[Avg Study Time], [Measures].[Avg Social Media Time], [Measures].[Avg Cgpa]} ON ROWS
+FROM [Star Schema Cube];
+
+
+--SNOWFLAKE SCHEMA
+--	Roll-Up (Aggregating from Class Level to College Level)
+SELECT 
+    NON EMPTY {[Measures].[Avg Study Time], [Measures].[Avg Social Media Time], [Measures].[Avg Cgpa]} ON COLUMNS, 
+    NON EMPTY {[College Dim 1].[College Name].Members} ON ROWS
+FROM [Snowflake Schema Cube];
+
+--	Drill-Down (From College → Class → Individual Students)
+SELECT 
+    NON EMPTY {[Measures].[Avg Study Time], [Measures].[Avg Social Media Time], [Measures].[Avg Cgpa]} ON COLUMNS, 
+    NON EMPTY {[College Dim 1].[College Name].Members * [Student Dim 1].[Class Id].Members * [Student Dim 1].[Student Id].Members} ON ROWS
+FROM [Snowflake Schema Cube];
+
+--	Dice (Filtering Data for a Specific Class)
+SELECT 
+    NON EMPTY {[Measures].[Avg Study Time], [Measures].[Avg Social Media Time], [Measures].[Avg Cgpa]} ON COLUMNS 
+FROM [Snowflake Schema Cube]
+WHERE ([Student Dim 1].[Year Of Study].&[III]);
+
+--	Slice (Filtering by College & Study Method)
+SELECT 
+    NON EMPTY {[Measures].[Avg Study Time], [Measures].[Avg Social Media Time], [Measures].[Avg Cgpa]} ON COLUMNS, 
+    NON EMPTY {[Student Dim 1].[Student Id].Members} ON ROWS
+FROM [Snowflake Schema Cube]
+WHERE (
+    [College Dim 1].[College Name].&[SVIET College], 
+    [Study Method Dim 1].[Study Resource].&[Notes]
+);
+
+--	Pivot (Switching Rows and Columns)
+SELECT 
+    NON EMPTY {[College Dim 1].[College Name].Members} ON COLUMNS, 
+    NON EMPTY {[Measures].[Avg Study Time], [Measures].[Avg Social Media Time], [Measures].[Avg Cgpa]} ON ROWS
+FROM [Snowflake Schema Cube];
+
+
+--FACT CONSTELLATION
+--Roll-Up (Summarize at College Level)
+SELECT 
+    NON EMPTY {[Measures].[Avg Study Time], [Measures].[Avg Social Media Time], [Measures].[Projects], [Measures].[Certifications]} ON COLUMNS, 
+    NON EMPTY {[College Dim 2].[College Name].Children} ON ROWS
+FROM [Fact Constellation Cube];
+
+--	Drill-Down (College → Class → Student)
+SELECT 
+    NON EMPTY {[Measures].[Avg Study Time], [Measures].[Avg Social Media Time], [Measures].[Projects], [Measures].[Certifications]} ON COLUMNS, 
+    NON EMPTY {[College Dim 2].[College Name].Children * [Student Dim 2].[Year Of Study].Children * [Student Dim 2].[Student Id].Children} ON ROWS
+FROM [Fact Constellation Cube];
+
+--	Dice (Filtering for a Specific College)
+SELECT 
+    NON EMPTY {[Measures].[Avg Study Time], [Measures].[Avg Social Media Time], [Measures].[Projects], [Measures].[Certifications]} ON COLUMNS 
+FROM [Fact Constellation Cube]
+WHERE ([College Dim 2].[College Name].&[SR Gudlavalleru Engineering College]);
+
+--	Slice (Filtering by Class & Social Media Platform)
+SELECT 
+    NON EMPTY {[Measures].[Avg Study Time], [Measures].[Avg Social Media Time], [Measures].[Projects], [Measures].[Certifications]} ON COLUMNS, 
+    NON EMPTY {[Student Dim 2].[Student Id].Children} ON ROWS
+FROM [Fact Constellation Cube]
+WHERE (
+    [Student Dim 2].[Year Of Study].&[III], 
+    [Social Media Dim 2].[Platform Name].&[Instagram]
+);
+
+--	Pivot (Switching Rows and Columns)
+SELECT 
+    NON EMPTY {[College Dim 2].[College Name].Children} ON COLUMNS, 
+    NON EMPTY {[Measures].[Avg Study Time], [Measures].[Avg Social Media Time], [Measures].[Projects], [Measures].[Certifications]} ON ROWS
+FROM [Fact Constellation Cube];
